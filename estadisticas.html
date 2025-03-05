@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de Intercambios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FFF9E6;
+        }
+        .card {
+            background-color: #67AB4F;
+            color: white;
+        }
+        .table thead {
+            background-color: #2C5A48 !important;
+            color: white;
+        }
+        .btn-primary {
+            background-color: #2C5A48;
+            border-color: #2C5A48;
+        }
+        .btn-primary:hover {
+            background-color: #1F4636;
+            border-color: #1F4636;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">Panel de administración</a>
+        </div>
+        <div class="d-flex">
+            <a href="estadisticas.html" class="btn btn-primary me-2" id="btn-estadisticas">Estadísticas</a>
+            <a href="publicaciones_A.html" class="btn btn-primary me-2" id="btn-publicaciones-A">publicaciones_A</a>
+            <a href="publicaciones_B.html" class="btn btn-primary me-2" id="btn-publicaciones-B">publicaciones_B</a>
+            <a href="reportes.html" class="btn btn-primary me-2" id="btn-reportes">reportes</a>
+        </div>
+    </nav>
+    
+    <script>
+        // Obtener el nombre de la página actual
+        const currentPage = window.location.pathname.split('/').pop();
+    
+        // Verificar qué página está activa y aplicar las clases correspondientes
+        if (currentPage === "estadisticas.html") {
+            document.getElementById("btn-estadisticas").classList.add("btn-light");
+            document.getElementById("btn-estadisticas").classList.remove("btn-primary");
+            document.getElementById("btn-estadisticas").disabled = true;
+        } else if (currentPage === "publicaciones_A.html") {
+            document.getElementById("btn-publicaciones-A").classList.add("btn-light");
+            document.getElementById("btn-publicaciones-A").classList.remove("btn-primary");
+            document.getElementById("btn-publicaciones-A").disabled = true;
+        } else if (currentPage === "publicaciones_B.html") {
+            document.getElementById("btn-publicaciones-B").classList.add("btn-light");
+            document.getElementById("btn-publicaciones-B").classList.remove("btn-primary");
+            document.getElementById("btn-publicaciones-B").disabled = true;
+        } else if (currentPage === "reportes.html") {
+            document.getElementById("btn-reportes").classList.add("btn-light");
+            document.getElementById("btn-reportes").classList.remove("btn-primary");
+            document.getElementById("btn-reportes").disabled = true;
+        }
+    </script>
+    
+
+    <div class="container mt-4">
+        <div class="d-flex align-items-center mb-4">
+            <img src="./src/logo_corregido.png" alt="Logo" style="height: 100px; margin-right: 10px;">
+            <h2 class="mb-4">📊 Estadísticas de Intercambios</h2>
+        </div>
+    
+        <!-- Filtros -->
+        <div class="card p-3 mb-3">
+            <h5>Filtrar Intercambios</h5>
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Categoría</label>
+                    <select class="form-select">
+                        <option value="0">Todas</option>
+                        <option value="1">Frutas</option>
+                        <option value="2">Helechos</option>
+                        <option value="3">Brotes</option>
+                        <option value="4">Insumos</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Ubicación</label>
+                    <select class="form-select">
+                        <option value="0">Todas</option>
+                        <option value="1">Ciudad A</option>
+                        <option value="2">Ciudad B</option>
+                        <option value="3">Ciudad C</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button class="btn btn-primary w-100">🔍 Filtrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card p-3 mb-3">
+                    <h5>📈 Intercambios Completados</h5>
+                    <canvas id="chartIntercambios"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 mb-3">
+                    <h5>📉 Intercambios Fallidos</h5>
+                    <canvas id="chartIntercambiosFallidos"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Intercambios -->
+        <div class="card p-3">
+            <h5>📄 Detalle de Intercambios</h5>
+            <table class="table table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Categoría</th>
+                        <th>Ubicación</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#5001</td>
+                        <td>@usuario1</td>
+                        <td>Fruta</td>
+                        <td>Ciudad A</td>
+                        <td>2025-02-21</td>
+                        <td><span class="badge bg-success">Completado</span></td>
+                    </tr>
+                    <tr>
+                        <td>#5002</td>
+                        <td>@usuario2</td>
+                        <td>Helechos</td>
+                        <td>Ciudad B</td>
+                        <td>2025-02-19</td>
+                        <td><span class="badge bg-warning">Pendiente</span></td>
+                    </tr>
+                    <tr>
+                        <td>#5003</td>
+                        <td>@usuario3</td>
+                        <td>Insumos</td>
+                        <td>Ciudad C</td>
+                        <td>2025-02-15</td>
+                        <td><span class="badge bg-danger">Cancelado</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Exportar datos -->
+        <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-success">📥 Exportar CSV</button>
+            <button class="btn btn-danger ms-2">📄 Exportar PDF</button>
+        </div>
+    </div>
+
+    <!-- Scripts para gráficos -->
+    <script>
+        // Cargar Navbar dinámico
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar-container").innerHTML = data;
+            })
+            .catch(error => console.error("Error al cargar el navbar:", error));
+
+        // Gráfico de intercambios completados
+        const ctx1 = document.getElementById('chartIntercambios').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Frutas', 'Helechos', 'Brotes', 'Insumos'],
+                datasets: [{
+                    label: 'Intercambios Completados',
+                    data: [50, 30, 20, 40],
+                    backgroundColor: ['blue', 'green', 'orange', 'purple']
+                }]
+            }
+        });
+
+        // Gráfico de intercambios fallidos
+        const ctx2 = document.getElementById('chartIntercambiosFallidos').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Frutas', 'Helechos', 'Brotes', 'Insumos'],
+                datasets: [{
+                    label: 'Intercambios Fallidos',
+                    data: [10, 15, 8, 12],
+                    backgroundColor: ['red', 'darkred', 'maroon', 'brown']
+                }]
+            }
+        });
+    </script>
+    
+</body>
+</html>

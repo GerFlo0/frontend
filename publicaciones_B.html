@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderación de Publicaciones Nuevas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FFF9E6;
+        }
+        .card {
+            background-color: #67AB4F;
+            color: white;
+        }
+        .table thead {
+            background-color: #2C5A48 !important;
+            color: white;
+        }
+        .btn-primary {
+            background-color: #2C5A48;
+            border-color: #2C5A48;
+        }
+        .btn-primary:hover {
+            background-color: #1F4636;
+            border-color: #1F4636;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">Panel de administración</a>
+        </div>
+        <div class="d-flex">
+            <a href="estadisticas.html" class="btn btn-primary me-2" id="btn-estadisticas">Estadísticas</a>
+            <a href="publicaciones_A.html" class="btn btn-primary me-2" id="btn-publicaciones-A">publicaciones_A</a>
+            <a href="publicaciones_B.html" class="btn btn-primary me-2" id="btn-publicaciones-B">publicaciones_B</a>
+            <a href="reportes.html" class="btn btn-primary me-2" id="btn-reportes">reportes</a>
+        </div>
+    </nav>
+    
+    <script>
+        // Obtener el nombre de la página actual
+        const currentPage = window.location.pathname.split('/').pop();
+    
+        // Verificar qué página está activa y aplicar las clases correspondientes
+        if (currentPage === "estadisticas.html") {
+            document.getElementById("btn-estadisticas").classList.add("btn-light");
+            document.getElementById("btn-estadisticas").classList.remove("btn-primary");
+            document.getElementById("btn-estadisticas").disabled = true;
+        } else if (currentPage === "publicaciones_A.html") {
+            document.getElementById("btn-publicaciones-A").classList.add("btn-light");
+            document.getElementById("btn-publicaciones-A").classList.remove("btn-primary");
+            document.getElementById("btn-publicaciones-A").disabled = true;
+        } else if (currentPage === "publicaciones_B.html") {
+            document.getElementById("btn-publicaciones-B").classList.add("btn-light");
+            document.getElementById("btn-publicaciones-B").classList.remove("btn-primary");
+            document.getElementById("btn-publicaciones-B").disabled = true;
+        } else if (currentPage === "reportes.html") {
+            document.getElementById("btn-reportes").classList.add("btn-light");
+            document.getElementById("btn-reportes").classList.remove("btn-primary");
+            document.getElementById("btn-reportes").disabled = true;
+        }
+    </script>
+    
+
+    <!-- Agregar Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Cargar el navbar -->
+    <script>
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar-container").innerHTML = data;
+            })
+            .catch(error => console.error("Error al cargar el navbar:", error));
+    </script>
+    
+    <div class="container mt-4">
+        <div class="d-flex align-items-center mb-4">
+            <!--Cambiar ruta de logo-->
+            <img src="./src/logo_corregido.png" alt="Logo" style="height: 100px; margin-right: 10px;">
+            <h2 class="mb-4">🛑 Moderación de Publicaciones Nuevas</h2>
+        </div>
+        
+        <!-- Filtros -->
+        <div class="card p-3 mb-3">
+            <h5>Filtrar Publicaciones</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <button class="btn btn-primary w-100">🔍 Filtrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Publicaciones Pendientes -->
+        <div class="card p-3">
+            <h5>Publicaciones Pendientes</h5>
+            <table class="table table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Contenido</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#2001</td>
+                        <td>@usuario1</td>
+                        <td>📸 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPublicacion1">📄 Ver Contenido</button></td>
+                        <td>
+                            <button class="btn btn-success btn-sm">✅ Aprobar</button>
+                            <button class="btn btn-danger btn-sm">❌ Rechazar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#2002</td>
+                        <td>@usuario2</td>
+                        <td>📸 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPublicacion2">📄 Ver Contenido</button></td>
+                        <td>
+                            <button class="btn btn-success btn-sm">✅ Aprobar</button>
+                            <button class="btn btn-danger btn-sm">❌ Rechazar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#2003</td>
+                        <td>@usuario3</td>
+                        <td>📸 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPublicacion3">📄 Ver Contenido</button></td>
+                        <td>
+                            <button class="btn btn-success btn-sm">✅ Aprobar</button>
+                            <button class="btn btn-danger btn-sm">❌ Rechazar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de Publicación 1 -->
+    <div class="modal fade" id="modalPublicacion1" tabindex="-1" aria-labelledby="modalPublicacion1Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPublicacion1Label">Detalles de la Publicación #2001</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>📸 Imagen Publicada</h6>
+                    <img src="https://via.placeholder.com/200" class="img-thumbnail" alt="Imagen publicada">
+
+                    <hr>
+
+                    <h6>📝 Texto de la Publicación</h6>
+                    <blockquote class="blockquote">
+                        "Esta es una publicación en revisión. Debe cumplir con las normas de la comunidad."
+                    </blockquote>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-success">✅ Aprobar</button>
+                    <button class="btn btn-danger">❌ Rechazar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales vacíos para otras publicaciones -->
+    <div class="modal fade" id="modalPublicacion2" tabindex="-1" aria-labelledby="modalPublicacion2Label" aria-hidden="true">
+        <div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Detalles de la Publicación #2002</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>ℹ️ Información no disponible aún.</p></div></div></div>
+    </div>
+
+    <div class="modal fade" id="modalPublicacion3" tabindex="-1" aria-labelledby="modalPublicacion3Label" aria-hidden="true">
+        <div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Detalles de la Publicación #2003</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>ℹ️ Información no disponible aún.</p></div></div></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
