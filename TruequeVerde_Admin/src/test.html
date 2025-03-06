@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar con Tailwind</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Botón de hamburguesa -->
+    <button id="menuButton" class="fixed top-4 left-4 p-2 bg-blue-500 text-white rounded-lg">
+        ☰
+    </button>
+
+    <!-- Overlay (fondo oscuro) -->
+<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden"></div>
+
+<!-- Sidebar -->
+<div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-50">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold">Sidebar</h2>
+        <ul class="mt-4">
+            <li class="mb-2"><a href="#" class="block p-2 hover:bg-gray-700">Inicio</a></li>
+            <li class="mb-2"><a href="#" class="block p-2 hover:bg-gray-700">Acerca de</a></li>
+            <li class="mb-2"><a href="#" class="block p-2 hover:bg-gray-700">Servicios</a></li>
+            <li class="mb-2"><a href="#" class="block p-2 hover:bg-gray-700">Contacto</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const menuButton = document.getElementById('menuButton');
+
+    // Abrir sidebar y mostrar overlay
+    menuButton.addEventListener('click', function() {
+        sidebar.classList.add('translate-x-0');
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+    });
+
+    // Cerrar sidebar y ocultar overlay
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('translate-x-0');
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+    });
+</script>
+
+</body>
+</html>

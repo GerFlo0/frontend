@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estadísticas de Intercambios</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <style>
+
+        .botonSidebar:hover {
+            background-color: #cccccc;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="bg-none p-4">
+
+        <div class="container mx-auto flex justify-between items-center">
+
+            <a href="#" class="flex items-center text-black font-display text-xl">
+                <img src="logo.png" class="h-10 mr-3"> Trueque Verde
+            </a>
+
+            <ul class="hidden lg:flex space-x-5 text-white" id="menu">
+                
+                <li>
+                    <button id="settings" class="top-4 left-4 p-2 text-black rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3">
+                                
+                            </circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+
+                            </path>
+                        </svg>
+                    </button>
+                </li>
+
+                <li>
+                    <button id="logout" class="top-4 left-4 p-2 text-black rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3H6a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h4M16 17l5-5-5-5M19.8 12H9"/>
+                        
+                        </svg>
+                    </button>
+                </li>
+
+                <li>
+                    <button id="menuButton" class="top-4 left-4 p-2 text-black rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </li>
+                
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden">
+    </div>
+
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-700 text-white transform -translate-x-full transition-transform duration-300 z-50">
+        
+        <div class="p-4">
+            <h2 class="text-lg text-white font-display text-center" >
+                Panel de Administración
+            </h2>
+
+            <ul class="mt-4 space-y-5">
+
+                <li>
+                    <a href="estadisticas.html">
+                    <button id="buttonEstadisticas" class="botonSidebar bg-white p-2 text-black w-full h-12 rounded-lg">
+                        Estadísticas
+                    </button>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="publicacionesA.html">
+                    <button id="buttonPubliA" class="botonSidebar bg-white p-2 text-black w-full h-12 rounded-lg">
+                        Publicaciones A
+                    </button>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="publicacionesB.html">
+                    <button id="buttonPubliB" class="botonSidebar bg-white p-2 text-black w-full h-12 rounded-lg">
+                        Publicaciones B
+                    </button>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="reportes.html">
+                    <button id="buttonReportes" class="botonSidebar bg-white p-2 text-black w-full h-12 rounded-lg">
+                        Reportados
+                    </button>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const menuButton = document.getElementById('menuButton');
+    
+        // Abrir sidebar y mostrar overlay
+        menuButton.addEventListener('click', function() {
+            sidebar.classList.add('translate-x-50');
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+        });
+    
+        // Cerrar sidebar y ocultar overlay
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+
+    </script>
+    
+    <script>
+
+        // Obtener el nombre de la página actual
+        const currentPage = window.location.pathname.split('/').pop();
+
+        // Verificar qué página está activa y aplicar las clases correspondientes
+        if (currentPage === "estadisticas.html") {
+            document.getElementById("buttonEstadisticas").classList.add("bg-green-400");
+            document.getElementById("buttonEstadisticas").classList.add("text-white");
+            document.getElementById("buttonEstadisticas").classList.remove("bg-white, text-black");
+            document.getElementById("buttonEstadisticas").disabled = true;
+        } else if (currentPage === "publicacionesA.html") {
+            document.getElementById("buttonPubliA").classList.add("bg-green-400");
+            document.getElementById("buttonPubliA").classList.add("text-white");
+            document.getElementById("buttonPubliA").classList.remove("bg-white, text-black");
+            document.getElementById("buttonPubliA").disabled = true;
+        } else if (currentPage === "publicacionesB.html") {
+            document.getElementById("buttonPubliB").classList.add("bg-green-400");
+            document.getElementById("buttonPubliB").classList.add("text-white");           
+            document.getElementById("buttonPubliB").classList.remove("bg-white, text-black");
+            document.getElementById("buttonPubliB").disabled = true;
+        } else if (currentPage === "reportes.html") {
+            document.getElementById("buttonReportes").classList.add("bg-green-400");
+            document.getElementById("buttonReportes").classList.add("text-white");
+            document.getElementById("buttonReportes").classList.remove("bg-white, text-black");
+            document.getElementById("buttonReportes").disabled = true;
+            }
+            
+    </script>
+
+    <div class="container mx-auto mt-5 px-100 mb-10">
+
+        <h2 class="text-2xl font-bold mb-5">
+            Estadísticas de Intercambios
+        </h2>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md mb-4">
+            
+            <h5 class="text-lg font-semibold mb-4">
+                Filtrar
+            </h5>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+                <div>
+
+                    <label class="block text-sm font-medium text-black">
+                        Categoría
+                    </label>
+
+                    <select class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+
+                        <option value="0">Todas</option>
+                        <option value="1">Frutas</option>
+                        <option value="2">Verduras</option>
+                        <option value="3">Semillas</option>
+                        <option value="4">Brotes</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label class="block text-sm font-medium text-black">
+                        Ubicación
+                    </label>
+
+                    <select class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                        <option value="0">Todas</option>
+                        <option value="1">Ciudad A</option>
+                        <option value="2">Ciudad B</option>
+                        <option value="3">Ciudad C</option>
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label class="block text-sm font-medium text-black">
+                        Fecha
+                    </label>
+
+                    <input type="date" class="mt-1 block w-full p-1.5 border border-gray-300 rounded-md">
+
+                </div>
+
+                <div class="flex items-end">
+
+                    <button class="w-full bg-[#2C5A48] text-white py-2 rounded hover:bg-[#1F4636]">
+                        Filtrar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded ">
+                <h5 class="font-semibold mb-2">Intercambios Completados</h5>
+                <canvas id="chartIntercambios"></canvas>
+            </div>
+            <div class="bg-white p-4 rounded ">
+                <h5 class="font-semibold mb-2">Intercambios Fallidos</h5>
+                <canvas id="chartIntercambiosFallidos"></canvas>
+            </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded shadow mt-4">
+            <h5 class="font-semibold mb-4">
+                Detalle de Intercambios
+            </h5>
+            <table class="w-full border-collapse border border-gray-300 mt-3">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="border p-2">ID</th>
+                        <th class="border p-2">Usuario</th>
+                        <th class="border p-2">Categoría</th>
+                        <th class="border p-2">Ubicación</th>
+                        <th class="border p-2">Fecha</th>
+                        <th class="border p-2">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td class="border p-2">#5001</td>
+                        <td class="border p-2">@usuario1</td>
+                        <td class="border p-2">Fruta</td>
+                        <td class="border p-2">Ciudad A</td>
+                        <td class="border p-2">2025-02-21</td>
+                        <td class="border p-2"><span class="bg-green-500 text-white px-2 py-1 rounded">Completado</span></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="border p-2">#5002</td>
+                        <td class="border p-2">@usuario2</td>
+                        <td class="border p-2">Verduras</td>
+                        <td class="border p-2">Ciudad B</td>
+                        <td class="border p-2">2025-02-19</td>
+                        <td class="border p-2"><span class="bg-yellow-500 text-white px-2 py-1 rounded">Pendiente</span></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="border p-2">#5003</td>
+                        <td class="border p-2">@usuario3</td>
+                        <td class="border p-2">Brotes</td>
+                        <td class="border p-2">Ciudad C</td>
+                        <td class="border p-2">2025-02-15</td>
+                        <td class="border p-2"><span class="bg-red-500 text-white px-2 py-1 rounded">Cancelado</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="flex justify-end mt-4 space-x-2">
+            <button class="bg-green-500 text-white py-2 px-4 rounded">Exportar CSV</button>
+            <button class="bg-red-500 text-white py-2 px-4 rounded">Exportar PDF</button>
+        </div>
+    </div>
+    
+    <script>
+        const ctx1 = document.getElementById('chartIntercambios').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Frutas', 'Verduras', 'Semillas', 'Brotes'],
+                datasets: [{
+                    label: 'Intercambios Completados',
+                    data: [50, 20, 40, 30],
+                    backgroundColor: ['#ff6549', '#6cc200', '#ffd712', '#29b063']
+                }]
+            }
+        });
+        
+        const ctx2 = document.getElementById('chartIntercambiosFallidos').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Frutas', 'Verduras', 'Semillas', 'Brotes'],
+                datasets: [{
+                    label: 'Intercambios Fallidos',
+                    data: [10, 15, 8, 12],
+                    backgroundColor: ['#ff6549', '#6cc200', '#ffd712', '#29b063']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
