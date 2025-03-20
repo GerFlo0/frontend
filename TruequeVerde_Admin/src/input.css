@@ -1,4 +1,5 @@
 @import "tailwindcss";
-@theme {
+
+:root {
     --font-display: "Oswald", "sans-serif"; 
-  }
+}
